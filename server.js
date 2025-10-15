@@ -1,13 +1,13 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config(); // Load .env variables first
 
-const app = require('./src/app');
+import connectDB from './src/db/db.js';
+import app from './src/app.js';
 
-const connectDB = require('./src/db/db');
+connectDB(); // Connect to MongoDB
 
+const PORT = process.env.PORT || 3000;
 
-connectDB();
-
-
-app.listen(3000, ()=>{
-  console.log("Server is running on port 3000");
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });

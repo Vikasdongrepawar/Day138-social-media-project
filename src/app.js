@@ -1,20 +1,12 @@
-const express = require('express')
+import express from 'express';
+import cors from 'cors';
+import authRoutes from './routes/auth.routes.js';
 
-const authRoutes = require('./models/routes/auth.routes')
+const app = express();
 
-const cookieParser = require('cookie-parser')
-const app = express()
+app.use(cors());
+app.use(express.json()); // essential for req.body
 
-app.use(express.json())
-app.use(cookieParser())
+app.use('/api/auth', authRoutes);
 
-// Use auth routes
-
-app.use('/api/auth', authRoutes)
-
-// Routes
-app.get('/', (req, res) => {
-  res.send('Welcome to the Social Media API')
-})
-
-// More routes can be added here
+export default app;
